@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
@@ -16,28 +18,27 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to @post, notice: "投稿しました"
+      redirect_to @post, notice: '投稿しました'
     else
-      flash.now[:alert] = "投稿に失敗しました"
+      flash.now[:alert] = '投稿に失敗しました'
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "更新しました"
+      redirect_to @post, notice: '更新しました'
     else
-      flash.now[:alert] = "更新に失敗しました"
+      flash.now[:alert] = '更新に失敗しました'
       render :edit
     end
   end
 
   def destroy
     @post.destroy!
-    redirect_to root_path, alert: "削除しました"
+    redirect_to root_path, alert: '削除しました'
   end
 
   private
@@ -45,7 +46,7 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-  
+
   def post_params
     params.require(:post).permit(:title, :content)
   end
